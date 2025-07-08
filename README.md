@@ -6,7 +6,6 @@ They are intended to introduce you to the basic syntax of fplll, and to let you 
 
 For ease of use, I recommend running these on https://cocalc.com
 You can create a free account, which gives you access to an Ubuntu virtual machine with Sagemath preinstalled.
-
 From there, you can create a Sagemath notebook, and perform the computations suggested in the lab.
 
 You can also find the slides on Lattice fundamentals, for reference.
