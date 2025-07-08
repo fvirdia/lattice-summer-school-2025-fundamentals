@@ -19,7 +19,7 @@ def bkz(beta, n):
     Basis = IntegerMatrix(n, n)
     Basis.randomize("qary", k=n//2, q=127)
 
-    Basis_GSO = fpylll.GSO.Mat(Basis, float_type="dd")
+    Basis_GSO = fpylll.GSO.Mat(Basis, float_type="d")
     Basis_GSO.update_gso()
 
     # run LLL on the basis to preprocess it
@@ -52,6 +52,7 @@ def bkz(beta, n):
 On a Sage notebook, you can generate a plot of the profile by using the `line` function.
 
 ```python
+profile, basis = bkz(20, 40)
 g = line([(i, profile[i]) for i in range(len(profile))])
 show(g)
 ```
