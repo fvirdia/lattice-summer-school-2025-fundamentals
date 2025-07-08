@@ -82,11 +82,10 @@ What about the variance? Maybe Corollary 8 in https://espitau.github.io/bin/rand
 
 ```python
 def gen_random_basis(rank):
-	from fpylll import IntegerMatrix
-	B = IntegerMatrix(n, n)
-	B.randomize("qary", k=n//2, q=127)
+	B = IntegerMatrix(rank, rank)
+	B.randomize("qary", k=rank//2, q=127)
 	# B.randomize("uniform", bits=20) # a different basis distribution!
-	basis = matrix(n, n)
+	basis = matrix(rank, rank)
 	B.to_matrix(basis)
 	return basis
 

@@ -1,18 +1,17 @@
-# Verifying the Geometric Series Assumption
-
-Prerequisite: Lab 1
-
-In this lab, we extend our predictions to the GSA.
-
-To do this, we will need to extract the basis profile.
-Generating Gram-Schmidt orthogonalisations can be a bit annoying, however fplll keeps track of those internally, which is quite convenient.
-
-You can use the following routine to perform BKZ-beta reduction of a basis.
-
-```python
+from sage.all import matrix, log, line, show
 import fpylll
+from fpylll import IntegerMatrix
 from fpylll.algorithms.bkz2 import BKZReduction
 from fpylll.fplll.bkz_param import BKZParam
+
+
+def gen_random_basis(rank):
+	B = IntegerMatrix(rank, rank)
+	B.randomize("qary", k=rank//2, q=127)
+	# B.randomize("uniform", bits=20) # a different basis distribution!
+	basis = matrix(rank, rank)
+	B.to_matrix(basis)
+	return basis
 
 
 # You can use gen_random_basis from lab 1, 
@@ -48,11 +47,17 @@ def bkz(basis, beta):
     Basis_GSO.B.to_matrix(reduced_basis)
 
     return profile, reduced_basis
-```
 
-On a Sage notebook, you can generate a plot of the profile by using the `line` and `show` functions.
 
-Does the GSA seem to hold at various dimensions?
-What happens if you choose smaller `q` values? For example, running BKZ-2, can you ever see the profile not being a straight line?
+rank = 30
+beta = 20
+basis = gen_random_basis(rank)
+profile, reduced_basis = bkz(basis, beta)
+g = line([(i, profile[i]) for i in range(len(profile))])
+show(g)
 
-You can find more kinds of supported basis on https://github.com/fplll/fpylll/blob/master/docs/tutorial.rst
+
+# if you are running on your computer and want to save the plot,
+# use the following:
+from sage.all import save
+save(g, "test.png", dpi=150)
